@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"co.edu.udea.backend"},{"l":"co.edu.udea.backend.config"},{"l":"co.edu.udea.backend.controller"},{"l":"co.edu.udea.backend.model"},{"l":"co.edu.udea.backend.service"},{"l":"co.edu.udea.backend.utils.common"},{"l":"co.edu.udea.backend.utils.exceptions"}];updateSearchResults();

@@ -1,0 +1,7 @@
+co.edu.udea.backend
+co.edu.udea.backend.config
+co.edu.udea.backend.controller
+co.edu.udea.backend.model
+co.edu.udea.backend.service
+co.edu.udea.backend.utils.common
+co.edu.udea.backend.utils.exceptions
