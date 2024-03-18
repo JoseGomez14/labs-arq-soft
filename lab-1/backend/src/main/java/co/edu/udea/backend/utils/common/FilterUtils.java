@@ -1,6 +1,6 @@
 package co.edu.udea.backend.utils.common;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class FilterUtils {
 
@@ -12,7 +12,7 @@ public class FilterUtils {
      * @param endDate     the end date of the range
      * @return true if the date is in the range, false otherwise
      */
-    public static boolean isDateInRange(LocalDate dateToCheck, LocalDate startDate, LocalDate endDate) {
+    public static boolean isDateInRange(LocalDateTime dateToCheck, LocalDateTime startDate, LocalDateTime endDate) {
         return !dateToCheck.isBefore(startDate) && !dateToCheck.isAfter(endDate);
     }
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.function.Predicate;
 import java.util.Collections;
 import java.util.List;
@@ -24,10 +24,10 @@ public class FlightService {
      * @param endDate   the end date of the range
      * @return List of flights within the range
      */
-    public List<Flight> searchFlightsByDate(LocalDate startDate, LocalDate endDate) {
+    public List<Flight> searchFlightsByDate(LocalDateTime startDate, LocalDateTime endDate) {
         DataValidation.dateIsAfter(endDate, startDate, "Flight Date");
-        return searchFlightsByCriteria(flight ->
-                FilterUtils.isDateInRange(flight.getDepartureDate(), startDate, endDate));
+        return searchFlightsByCriteria(
+                flight -> FilterUtils.isDateInRange(flight.getDepartureDate(), startDate, endDate));
     }
 
     /**
@@ -38,8 +38,7 @@ public class FlightService {
      */
     public List<Flight> searchFlightsByAirline(String airline) {
         DataValidation.validateNotNull(airline, "Airline");
-        return searchFlightsByCriteria(flight ->
-                flight.getAirline().equalsIgnoreCase(airline));
+        return searchFlightsByCriteria(flight -> flight.getAirline().equalsIgnoreCase(airline));
     }
 
     /**
@@ -53,8 +52,7 @@ public class FlightService {
         DataValidation.validatePositive(minPrice, "Minimum Price");
         DataValidation.validatePositive(maxPrice, "Maximum Price");
         DataValidation.numberIsGreater(maxPrice, minPrice, "Price");
-        return searchFlightsByCriteria(flight ->
-                FilterUtils.isPriceInRange(flight.getPrice(), minPrice, maxPrice));
+        return searchFlightsByCriteria(flight -> FilterUtils.isPriceInRange(flight.getPrice(), minPrice, maxPrice));
     }
 
     /**
@@ -69,16 +67,20 @@ public class FlightService {
      * @param destination the destination of the flight
      * @return List of flights with all the criteria
      */
-    public List<Flight> searchByAll(LocalDate startDate, LocalDate endDate, String airline, int minPrice, int maxPrice, String origin, String destination) {
+    public List<Flight> searchByAll(LocalDateTime startDate, LocalDateTime endDate, String airline, int minPrice,
+            int maxPrice, String origin, String destination) {
         DataValidation.dateIsAfter(endDate, startDate, "Flight Date");
         DataValidation.validateNotNull(airline, "Airline");
         DataValidation.validatePositive(minPrice, "Minimum Price");
         DataValidation.validatePositive(maxPrice, "Maximum Price");
         DataValidation.numberIsGreater(maxPrice, minPrice, "Price");
 
-        return searchFlightsByCriteria(flight -> FilterUtils.isDateInRange(flight.getDepartureDate(), startDate, endDate)
-                && flight.getAirline().equalsIgnoreCase(airline) && FilterUtils.isPriceInRange(flight.getPrice(), minPrice, maxPrice)
-                && flight.getOrigin().equalsIgnoreCase(origin) && flight.getDestination().equalsIgnoreCase(destination));
+        return searchFlightsByCriteria(
+                flight -> FilterUtils.isDateInRange(flight.getDepartureDate(), startDate, endDate)
+                        && flight.getAirline().equalsIgnoreCase(airline)
+                        && FilterUtils.isPriceInRange(flight.getPrice(), minPrice, maxPrice)
+                        && flight.getOrigin().equalsIgnoreCase(origin)
+                        && flight.getDestination().equalsIgnoreCase(destination));
     }
 
     /**

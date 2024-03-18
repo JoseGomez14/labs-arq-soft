@@ -1,9 +1,9 @@
 package co.edu.udea.backend.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * This class represents a flight entity.
@@ -32,13 +32,13 @@ public class Flight {
     /**
      * The departure date and time of the flight.
      */
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    private LocalDate departureDate;
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    private LocalDateTime departureDate;
     /**
      * The arrival date and time of the flight.
      */
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    private LocalDate arrivalDate;
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    private LocalDateTime arrivalDate;
 
     /**
      * Default constructor
@@ -57,7 +57,8 @@ public class Flight {
      * @param departureDate The departure date and time of the flight
      * @param arrivalDate   The arrival date and time of the flight
      */
-    public Flight(int id, String airline, String origin, String destination, int price, LocalDate departureDate, LocalDate arrivalDate) {
+    public Flight(int id, String airline, String origin, String destination, int price, LocalDateTime departureDate,
+            LocalDateTime arrivalDate) {
         this.id = id;
         this.airline = airline;
         this.origin = origin;
@@ -108,19 +109,19 @@ public class Flight {
         this.price = price;
     }
 
-    public LocalDate getDepartureDate() {
+    public LocalDateTime getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(LocalDate departureDate) {
+    public void setDepartureDate(LocalDateTime departureDate) {
         this.departureDate = departureDate;
     }
 
-    public LocalDate getArrivalDate() {
+    public LocalDateTime getArrivalDate() {
         return arrivalDate;
     }
 
-    public void setArrivalDate(LocalDate arrivalDate) {
+    public void setArrivalDate(LocalDateTime arrivalDate) {
         this.arrivalDate = arrivalDate;
     }
 }

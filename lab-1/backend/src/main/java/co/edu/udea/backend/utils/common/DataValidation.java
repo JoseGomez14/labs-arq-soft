@@ -1,6 +1,6 @@
 package co.edu.udea.backend.utils.common;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class DataValidation {
 
@@ -34,7 +34,7 @@ public class DataValidation {
      * @param startDate    the start date to compare with
      * @param propertyName the name of the property to check
      */
-    public static void dateIsAfter(LocalDate dateToCheck, LocalDate startDate, String propertyName) {
+    public static void dateIsAfter(LocalDateTime dateToCheck, LocalDateTime startDate, String propertyName) {
         if (dateToCheck.isBefore(startDate)) {
             throw new IllegalArgumentException(propertyName + ": The date is before the start date");
         }

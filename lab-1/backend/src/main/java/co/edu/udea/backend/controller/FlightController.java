@@ -1,6 +1,7 @@
 package co.edu.udea.backend.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import co.edu.udea.backend.model.Flight;
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * Flight search controller with endpoints for searching with filters
- * Includes endpoints for searching by date, airline, price, origin and destination
+ * Includes endpoints for searching by date, airline, price, origin and
+ * destination
  */
 @RestController
 @RequestMapping("/flights/search")
@@ -35,8 +37,8 @@ public class FlightController {
             @RequestParam(name = "startDate") String startDate,
             @RequestParam(name = "endDate") String endDate) {
 
-        LocalDate parsedStarDate = LocalDate.parse(startDate);
-        LocalDate parsedEndDate = LocalDate.parse(endDate);
+        LocalDateTime parsedStarDate = LocalDate.parse(startDate).atStartOfDay();
+        LocalDateTime parsedEndDate = LocalDate.parse(endDate).atStartOfDay();
 
         return flightService.searchFlightsByDate(parsedStarDate, parsedEndDate);
     }
@@ -103,8 +105,9 @@ public class FlightController {
             @RequestParam(name = "origin") String origin,
             @RequestParam(name = "destination") String destination) {
 
-        LocalDate parsedStarDate = LocalDate.parse(startDate);
-        LocalDate parsedEndDate = LocalDate.parse(endDate);
-        return flightService.searchByAll(parsedStarDate, parsedEndDate, airline, minPrice, maxPrice, origin, destination);
+        LocalDateTime parsedStarDate = LocalDate.parse(startDate).atStartOfDay();
+        LocalDateTime parsedEndDate = LocalDate.parse(endDate).atStartOfDay();
+        return flightService.searchByAll(parsedStarDate, parsedEndDate, airline, minPrice, maxPrice, origin,
+                destination);
     }
 }
