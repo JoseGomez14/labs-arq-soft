@@ -1,5 +1,14 @@
 # Laboratorios Arquitectura de Software
 
+**Integrantes:**
+
+- [X] [Daniel Lujan Agudelo](https://github.com/daniel-lujan)
+- [X] [Jose David Gómez Muñetón](https://github.com/JoseGomez14)
+- [X] [Juan Pablo Arango Gaviria](https://github.com/JuanPablo-A)
+- [X] [Maritza Tabares Cárdenas](https://github.com/MaritzaTC)
+- [X] [Luis Guillermo Sánchez Cubides](https://github.com/GuillermoSanchez11)
+- [X] [Ana María Vega Angarita](https://github.com/anavegaa)
+
 > [!IMPORTANT]  
 > Repositorio con fines académicos
 
