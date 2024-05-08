@@ -1,0 +1,20 @@
+---
+import { getFlights } from "../services/business";
+import FlightCard from "./FlightCard.astro";
+
+const data = await getFlights();
+---
+
+<h1>Flights</h1>
+<ul>
+  {data.map((flight) => <FlightCard flight={flight} />)}
+</ul>
+
+<style>
+  ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(36ch, 1fr));
+    gap: 2rem;
+    padding: 0;
+  }
+</style>

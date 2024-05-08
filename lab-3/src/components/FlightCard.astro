@@ -1,0 +1,171 @@
+---
+import PlaneDeparture from "./Icons/PlaneDeparture.astro";
+
+interface Props {
+  flight: TFlight;
+}
+
+const { flight } = Astro.props;
+
+const timeFormatter = new Intl.DateTimeFormat("en-US", {
+  timeStyle: "short",
+  hour12: false,
+});
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  weekday: "short",
+});
+
+const currencyFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 0,
+});
+
+const departureDate = dateFormatter.format(
+  new Date(flight.scales[0].departureDate)
+);
+
+const departureTime = timeFormatter.format(
+  new Date(flight.scales[0].departureDate)
+);
+
+const arrivalDate = dateFormatter.format(
+  new Date(flight.scales.slice(-1)[0].arrivalDate)
+);
+
+const arrivalTime = timeFormatter.format(
+  new Date(flight.scales.slice(-1)[0].arrivalDate)
+);
+
+const basePrice = currencyFormatter.format(flight.basePrice);
+---
+
+<li class="link-card">
+  <a href={`/flights/${flight.id}`}>
+    <div class="flight-content">
+      <div class="flight-header">
+        <div class="flight-info">
+          <div class="origin-info">
+            <h2>{departureTime}</h2>
+            <p>{flight.scales[0].originAirport.id}</p>
+            <p>{departureDate}</p>
+          </div>
+          <div class="flight-divider">
+            <PlaneDeparture />
+            <p>{flight.scales[0].airplaneModel.family} {flight.scales[0].airplaneModel.id}</p>
+          </div>
+          <div class="destination-info">
+            <h2>{arrivalTime}</h2>
+            <p>{flight.scales.slice(-1)[0].destinationAirport.id}</p>
+            <p>{arrivalDate}</p>
+          </div>
+        </div>
+        <div class="flight-price">
+          <h2>{basePrice}</h2>
+          <p>USD</p>
+        </div>
+      </div>
+    </div>
+  </a>
+</li>
+<style>
+  .link-card {
+    list-style: none;
+    display: flex;
+    padding: 1px;
+    background-color: #23262d;
+    background-image: none;
+    background-size: 400%;
+    border-radius: 7px;
+    background-position: 100%;
+    transition: background-position 0.25s cubic-bezier(0.01, 0.03, 0.03, 0.22);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+  .link-card > a {
+    width: 100%;
+    text-decoration: none;
+    line-height: 1.4;
+    padding: calc(1.5rem - 1px);
+    border-radius: 8px;
+    color: white;
+    background-color: #23262d;
+    opacity: 0.8;
+  }
+  h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  p {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+  }
+  .link-card:is(:hover, :focus-within) {
+    background-position: 0;
+    background-image: var(--accent-gradient);
+  }
+  .link-card:is(:hover, :focus-within) h2 {
+    color: rgb(var(--accent-light));
+  }
+
+  .flight-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .flight-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .flight-info {
+    margin-right: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .origin-info,
+  .destination-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .origin-info h2,
+  .destination-info h2 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  .flight-divider {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .flight-price {
+    width: 12rem;
+    margin-left: 0.5rem;
+    padding: 1.25rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-left: rgb(var(--accent-light)) solid 1px;
+  }
+
+  .flight-price h2 {
+    color: rgb(var(--accent-light));
+    font-size: 1.5rem;
+  }
+
+  .flight-price p {
+    font-size: 1rem;
+  }
+</style>
